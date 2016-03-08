@@ -17,14 +17,5 @@ data<-subset(data, CCJs<10,)
 tail(table(data$CCJs))
 
 
-#split data for train/test
-## 75% of the sample size
-sample.size <- floor(0.75 * nrow(data))
-## set the seed to make your partition reproductible
-set.seed(99)
-##select indexes of row for training set
-train.idx <- sample(seq_len(nrow(data)), size=sample.size)
-#selecting and assigning data point for traing set and test set
-train.forest <- mtcars[train.idx, ]
-test.forest <- mtcars[-train.idx, ]
+
 
