@@ -45,3 +45,4 @@ tail(table(data$CCJs))
 summary(data$Loan.amount)
 #Outcome
 summary(data$Outcome)
+
