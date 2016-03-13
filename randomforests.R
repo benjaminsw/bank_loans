@@ -88,3 +88,5 @@ loan.forest3<-randomForest(x=train.forest, y=train.outcome.forest,
 loan.forest3$confusion
 loan.forest2$importance
 #print(loan.forest2)
+
+#use bin=5, now change 
