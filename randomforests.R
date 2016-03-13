@@ -32,9 +32,9 @@ test.outcome.forest <-data[-train.idx, c("Outcome")]
 loan.forest1<-randomForest(x=train.forest, y=train.outcome.forest ,
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
 loan.forest1$confusion
-#loan.forest1$importance
+loan.forest1$importance
 #print(loan.forest1)
-importance(loan.forest1) 
+
 #------------------------------------prep data for 2nd forest---------------------------------------
 #bining countinuous variables
 #bin = 10
@@ -59,9 +59,9 @@ test.outcome.forest <-data[-train.idx, c("Outcome")]
 loan.forest2<-randomForest(x=train.forest, y=train.outcome.forest,
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
 loan.forest2$confusion
-#loan.forest2$importance
+loan.forest2$importance
 #print(loan.forest2)
-importance(loan.forest2) 
+ 
 #------------------------------------prep data for 2nd forest---------------------------------------
 #bining countinuous variables
 #bin = 5
@@ -86,6 +86,5 @@ test.outcome.forest <-data[-train.idx, c("Outcome")]
 loan.forest3<-randomForest(x=train.forest, y=train.outcome.forest,
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
 loan.forest3$confusion
-#loan.forest2$importance
+loan.forest2$importance
 #print(loan.forest2)
-importance(loan.forest3) 
