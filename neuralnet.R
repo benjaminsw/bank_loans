@@ -21,10 +21,12 @@ test.nn <- train.nn.scaled[-index,]
 #run nn
 n <- names(train.nn)
 f <- as.formula(paste("Outcome ~", paste(n[!n %in% "Outcome"], collapse = " + ")))
-nn <- neuralnet(f, data=train.nn, hidden=c(5), linear.output=F, stepmax= 1e+05, threshold=0.01, algorithm='backprop', learningrate=0.01)
-#plot nns
-plot.nn(nn)
-#predict nn
+nn <- neuralnet(f, data=train.nn, linear.output=F, stepmax= 1e+05, threshold=0.01, algorithm='backprop', hidden=as.vector(nodes), learningrate=rate/(3^i))
+predict.nn <- compute(nn,test.nn[,1:11])
+attr.name<- paste("rate",i,"node",nodes,sep="")
+test.nn[,attr.name]<-ifelse(predict.nn$net.result>0.5,"paid","defaulted")
+nn
+table(test.nn$predict, test.nn[,attr.name])
 predict.nn <- compute(nn,test.nn[,1:11])
 test.nn$predict <- ifelse(predict.nn$net.result>0.5,"paid","defaulted")
 #confusion matrix
