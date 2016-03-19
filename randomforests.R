@@ -2,6 +2,7 @@
 #http://h2o-release.s3.amazonaws.com/h2o/master/1247/docs-website/datascience/rf.html
 #https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm
 library(randomForest)
+library(ggplot2)
 #set seed to make this reproducable
 set.seed(99)
 #change Postcode.area back to factor
@@ -21,20 +22,25 @@ train.idx <- sample(seq_len(nrow(data)), size=sample.size)
 #------------------------------------prep data for 1st randomforest----------------------------------
 #selecting and assigning data point for traing set and test set
 train.forest <- data[train.idx, c("Gender",
-                                   "Years.at.address","Employment.status","Country","Current.debt",
+                                   "Years.at.address","Employment.status","Country",
                                    "Own.home","CCJs")]
 train.outcome.forest <- data[train.idx, c("Outcome")]
 test.forest <- data[-train.idx, c("Gender",
-                                  "Years.at.address","Employment.status","Country","Current.debt",
+                                  "Years.at.address","Employment.status","Country",
                                   "Own.home","CCJs")]
 test.outcome.forest <-data[-train.idx, c("Outcome")]
 #--------------------------------------run 1st randomforest----------------------------------------------
-loan.forest1<-randomForest(x=train.forest, y=train.outcome.forest ,
+loan.forest1<-randomForest(x=train.forest, y=train.outcome.forest , 
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
-loan.forest1$confusion
+loan.forest1
+#http://stats.stackexchange.com/questions/92419/relative-importance-of-a-set-of-predictors-in-a-random-forests-classification-in
+#MeanDecreaseGini is a measure of variable importance based on the Gini impurity index used for the calculation of splits during training.
 loan.forest1$importance
 #print(loan.forest1)
-
+loan.forest1.5try <- randomForest(x=train.forest, y=train.outcome.forest , mtry = 5,
+                           xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
+loan.forest1.5try
+loan.forest1.5try$importance
 #------------------------------------prep data for 2nd forest---------------------------------------
 #bining countinuous variables
 #bin = 10
@@ -58,10 +64,10 @@ test.outcome.forest <-data[-train.idx, c("Outcome")]
 
 loan.forest2<-randomForest(x=train.forest, y=train.outcome.forest,
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
-loan.forest2$confusion
+loan.forest2
 loan.forest2$importance
-#print(loan.forest2)
- 
+
+
 #------------------------------------prep data for 2nd forest---------------------------------------
 #bining countinuous variables
 #bin = 5
@@ -85,7 +91,7 @@ test.outcome.forest <-data[-train.idx, c("Outcome")]
 
 loan.forest3<-randomForest(x=train.forest, y=train.outcome.forest,
                            xtest=test.forest, ytest=outcome.forest, replace = TRUE, importance = TRUE)
-loan.forest3$confusion
+loan.forest3
 loan.forest2$importance
 #print(loan.forest2)
 
