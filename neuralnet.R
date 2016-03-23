@@ -8,6 +8,7 @@ numeric.data.nn <- data[,c("Age", "Years.at.address",
 factor.data.nn <- data[,c("Gender", "Employment.status", "Country",           
                           "Postcode.area", "Own.home" , "Outcome")]
 #factor to numeric
+factor.data.nn$Postcode.area <- as.factor(factor.data.nn$Postcode.area)
 factor.data.nn <- as.data.frame(lapply(factor.data.nn,as.numeric))
 #feature scaling
 train.nn <- data.frame(numeric.data.nn, factor.data.nn)
