@@ -305,7 +305,7 @@ nn
 table(test.nn$Outcome, test.nn$rate0.003nodes10)
 table(test.nn$Outcome == test.nn$rate0.003nodes10)["TRUE"]
 table(test.nn$Outcome == test.nn$rate0.003nodes10)["FALSE"]
-#--------------------------------learning 0.01------------------------------------------------
+#--------------------------------learning 0.001------------------------------------------------
 ##nn with learning 0.001 hidden 2 ******not converged
 nn <- neuralnet(f, data=train.nn, linear.output=F, stepmax= 1e+05, threshold=0.1, rep=5, algorithm='backprop', learningrate=0.001, hidden=2)
 predict.nn <- compute(nn,test.nn[,1:11])
